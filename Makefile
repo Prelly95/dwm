@@ -20,6 +20,7 @@ options:
 ${OBJ}: config.h config.mk
 
 config.h:
+	@echo $@
 	cp config.def.h $@
 
 dwm: ${OBJ}
