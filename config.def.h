@@ -1,13 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int gappx     = 18;       /* gap pixel between windows */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
-static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "FontAwesome:size=12", "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static unsigned int gappx              = 18;       /* gap pixel between windows */
+static unsigned int borderpx           = 1;        /* border pixel of windows */
+static unsigned int snap               = 32;       /* snap pixel */
+static unsigned int horizpadbar        = 0;        /* horizontal padding for statusbar */
+static unsigned int vertpadbar         = 2;        /* vertical padding for statusbar */
+static int showbar                     = 1;        /* 0 means no bar */
+static int topbar                      = 1;        /* 0 means bottom bar */
+static const char *fonts[]          = { "FontAwesome:size=12", "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -82,6 +84,8 @@ ResourcePref resources[] = {
 		{ "topbar",          	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
+		{ "horizpadbar",      	INTEGER, &horizpadbar },
+		{ "vertpadbar",      	INTEGER, &vertpadbar },
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
