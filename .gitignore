@@ -57,3 +57,4 @@ dkms.conf
 
 # Patch files
 *.orig
+*.rej
