@@ -35,8 +35,8 @@ static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,                1 << 8,       0,           -1,        50,50,500,500,        5 },
 	{  NULL,      NULL,       "nmtui",             0,            1,            0,        3400,1300,1200,1200,  5 },
 	{  NULL,      NULL,       "Volume Control",    0,            1,            0,        3400,1300,1200,1200,  5 },
+	{  "Tk",      NULL,       NULL,                0,            1,            0,        3400,1300,1100,800,   5 },
 };
-
 /* layout(s) */
 static float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
