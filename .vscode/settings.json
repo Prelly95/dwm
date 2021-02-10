@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.geoconfig": "json",
+        "*.h": "c"
+    }
+}
