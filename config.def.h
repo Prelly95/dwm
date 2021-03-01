@@ -8,10 +8,11 @@ static unsigned int horizpadbar        = 0;        /* horizontal padding for sta
 static unsigned int vertpadbar         = 2;        /* vertical padding for statusbar */
 static int showbar                     = 1;        /* 0 means no bar */
 static int topbar                      = 1;        /* 0 means bottom bar */
-static const char *fonts[] = {"Font Awesome 5 Brands:size=20",
-							  "Font Awesome 5 Free:size=20",
-							  "FontAwesome:size=20",
-							  "Liberation Mono:size=18"};
+static const char *fonts[] ={	"Font Awesome 5 Brands:size=20",
+								"Font Awesome 5 Free:size=20",
+								"FontAwesome:size=20",
+								"Liberation Mono:size=18"
+							};
 static const char dmenufont[]       = "monospace:size=18";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
