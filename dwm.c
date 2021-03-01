@@ -232,6 +232,7 @@ static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
+static void tagview(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
@@ -1863,6 +1864,21 @@ tag(const Arg *arg)
 		focus(NULL);
 		arrange(selmon);
 	}
+}
+
+void tagview(const Arg *arg)
+{
+	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
+		return;
+
+	selmon->seltags ^= 1; /* toggle sel tagset */
+	if (arg->ui & TAGMASK)
+	{
+		selmon->sel->tags = arg->ui & TAGMASK;
+		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
+	}
+	focus(NULL);
+	arrange(selmon);
 }
 
 void
