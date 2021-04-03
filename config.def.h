@@ -94,6 +94,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
+	// My Custom Keybindings
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/Devel/suckless/dmenu/scripts/browser-profile.sh") },
 };
 
 /* button definitions */
