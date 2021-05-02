@@ -22,7 +22,7 @@ static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
 };
 
 /* tagging */
@@ -103,7 +103,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
 	// My Custom Keybindings
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/Devel/suckless/dmenu/scripts/browser-profile.sh") },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/Devel/suckless/dmenu/scripts/firefox-profile.sh") },
 };
 
 /* button definitions */
