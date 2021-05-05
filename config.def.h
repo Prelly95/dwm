@@ -104,7 +104,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
 	// My Custom Keybindings
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/Devel/suckless/dmenu/scripts/firefox-profile.sh") },
+	{ MODKEY,                       XK_w,      spawn,			SHCMD("~/Devel/suckless/dmenu/scripts/firefox-profile.sh") },
+	{ MODKEY,                       XK_r, refreshmon,		{0} },
 };
 
 /* button definitions */
