@@ -1,25 +1,25 @@
 /* See LICENSE file for copyright and license details.
- *
- * dynamic window manager is designed like any other X client as well. It is
- * driven through handling X events. In contrast to other X clients, a window
- * manager selects for SubstructureRedirectMask on the root window, to receive
- * events about window (dis-)appearance. Only one X connection at a time is
- * allowed to select for this event mask.
- *
- * The event handlers of dwm are organized in an array which is accessed
- * whenever a new event has been fetched. This allows event dispatching
- * in O(1) time.
- *
- * Each child of the root window is called a client, except windows which have
- * set the override_redirect flag. Clients are organized in a linked client
- * list on each monitor, the focus history is remembered through a stack list
- * on each monitor. Each client contains a bit array to indicate the tags of a
- * client.
- *
- * Keys and tagging rules are organized as arrays and defined in config.h.
- *
- * To understand everything else, start reading main().
- */
+*
+* dynamic window manager is designed like any other X client as well. It is
+* driven through handling X events. In contrast to other X clients, a window
+* manager selects for SubstructureRedirectMask on the root window, to receive
+* events about window (dis-)appearance. Only one X connection at a time is
+* allowed to select for this event mask.
+*
+* The event handlers of dwm are organized in an array which is accessed
+* whenever a new event has been fetched. This allows event dispatching
+* in O(1) time.
+*
+* Each child of the root window is called a client, except windows which have
+* set the override_redirect flag. Clients are organized in a linked client
+* list on each monitor, the focus history is remembered through a stack list
+* on each monitor. Each client contains a bit array to indicate the tags of a
+* client.
+*
+* Keys and tagging rules are organized as arrays and defined in config.h.
+*
+* To understand everything else, start reading main().
+*/
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
@@ -45,27 +45,27 @@
 #include "util.h"
 
 /* macros */
-#define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
-#define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
-#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
-                               * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
-#define LENGTH(X)               (sizeof X / sizeof X[0])
-#define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
-#define WIDTH(X)                ((X)->w + 2 * (X)->bw)
-#define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
-#define TAGMASK                 ((1 << LENGTH(tags)) - 1)
-#define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+#define BUTTONMASK				(ButtonPressMask|ButtonReleaseMask)
+#define CLEANMASK(mask)			(mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
+#define INTERSECT(x,y,w,h,m)	(MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
+									* MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+#define ISVISIBLE(C)			((C->tags & C->mon->tagset[C->mon->seltags]))
+#define LENGTH(X)				(sizeof X / sizeof X[0])
+#define MOUSEMASK				(BUTTONMASK|PointerMotionMask)
+#define WIDTH(X)				((X)->w + 2 * (X)->bw)
+#define HEIGHT(X)				((X)->h + 2 * (X)->bw)
+#define TAGMASK					((1 << LENGTH(tags)) - 1)
+#define TEXTW(X)				(drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
-enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
-enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
-       NetWMFullscreen, NetActiveWindow, NetWMWindowType,
-       NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
-enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
-enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-       ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
+enum {	CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+enum {	SchemeNorm, SchemeSel }; /* color schemes */
+enum {	NetSupported, NetWMName, NetWMState, NetWMCheck,
+		NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+		NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+enum {	WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+enum {	ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+		ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
 
 typedef union {
 	int i;
@@ -726,8 +726,8 @@ drawbar(Monitor *m)
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
 			drw_rect(drw, x + boxw, 0, w - ( 2 * boxw + 1), (boxw * .5),
-			    m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-			    urg & 1 << i);
+				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+				urg & 1 << i);
 
 		x += w;
 	}
@@ -737,7 +737,7 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
-            /* fix overflow when window name is bigger than window width */
+			/* fix overflow when window name is bigger than window width */
 			int mid = (m->ww - (int)TEXTW(m->sel->name)) / 2 - x;
 			/* make sure name will not overlap on tags even when it is very long */
 			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
@@ -1751,10 +1751,8 @@ togglebar(const Arg *arg)
 void
 refreshmon(const Arg *arg)
 {
-	// selmon->showbar = !selmon->showbar;
-	updatebarpos(selmon);
-	// XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-	arrange(selmon);
+	togglebar(arg);
+	togglebar(arg);
 }
 
 void
@@ -2127,8 +2125,8 @@ wintomon(Window w)
 }
 
 /* There's no way to check accesses to destroyed windows, thus those cases are
- * ignored (especially on UnmapNotify's). Other types of errors call Xlibs
- * default error handler, which may call exit. */
+* ignored (especially on UnmapNotify's). Other types of errors call Xlibs
+* default error handler, which may call exit. */
 int
 xerror(Display *dpy, XErrorEvent *ee)
 {
@@ -2154,7 +2152,7 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
 }
 
 /* Startup Error handler to check if another window manager
- * is already running. */
+* is already running. */
 int
 xerrorstart(Display *dpy, XErrorEvent *ee)
 {
