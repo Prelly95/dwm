@@ -1752,6 +1752,7 @@ void
 refreshmon(const Arg *arg)
 {
 	togglebar(arg);
+	usleep(300000);
 	togglebar(arg);
 }
 
