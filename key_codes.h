@@ -96,3 +96,8 @@
 #define KC_audio_next				171
 #define KC_audio_prev				173
 #define KC_audio_stop				174
+
+#define Button6						6
+#define Button7						7
+#define Button8						8
+#define Button9						9

@@ -216,6 +216,8 @@ static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
+static void inctag(const Arg *arg);
+static void folwin(const Arg *arg);
 static void refreshmon(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
 static void unmanage(Client *c, int destroyed);
@@ -1695,6 +1697,44 @@ tagview(const Arg *arg)
 		arrange(selmon);
 	}
 	view(arg);
+}
+
+void
+inctag(const Arg *arg)
+{	unsigned int tmp_tags = selmon->tagset[selmon->seltags];
+	if (arg->i > 0)
+	{	tmp_tags <<= 1;
+	}
+	else
+	{	tmp_tags >>= 1;
+	}
+
+	if(!(tmp_tags & TAGMASK))
+		return;
+
+	selmon->tagset[selmon->seltags] = tmp_tags;
+	focus(NULL);
+	arrange(selmon);
+}
+
+void
+folwin(const Arg *arg)
+{	if(arg->i > 0)
+	{	unsigned int new_tag = (selmon->sel->tags << 1);
+		if (selmon->sel && (new_tag & TAGMASK))
+		{	selmon->sel->tags = new_tag & TAGMASK;
+			focus(NULL);
+			arrange(selmon);
+		}
+	}
+	else if(arg->i < 0)
+	{	unsigned int new_tag = (selmon->sel->tags >> 1);
+		if (selmon->sel && (new_tag & TAGMASK))
+		{	selmon->sel->tags = new_tag & TAGMASK;
+			focus(NULL);
+			arrange(selmon);
+		}
+	}
 }
 
 void
