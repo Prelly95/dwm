@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"*.spec": "python",
+		"*.tcc": "cpp",
+		"typeinfo": "cpp"
+	}
+}
