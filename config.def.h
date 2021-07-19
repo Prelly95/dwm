@@ -7,12 +7,10 @@ static const unsigned int snap		= 32;	/* snap pixel */
 static const int showbar			= 1;	/* 0 means no bar */
 static const int topbar				= 1;	/* 0 means bottom bar */
 
-static const char *fonts[] ={	"Font Awesome 5 Brands:size=20",
-								"Font Awesome 5 Free:size=20",
-								"FontAwesome:size=20",
-								"Liberation Mono:size=18"
+static const char *fonts[] ={	"FontAwesome:size=34",
+								"Liberation Mono:size=34"
 							};
-static const char dmenufont[]		= "monospace:size=18";
+static const char dmenufont[]		= "FontAwesome:size=34";
 
 static const char col_gray1[]		= "#222222";
 static const char col_gray2[]		= "#444444";
@@ -98,7 +96,7 @@ static Key keys[] = {
 	// My Custom Keybindings
 	{MODKEY|ShiftMask,				KC_r,						quit,				{1}},
 	{MODKEY,						KC_r,						refreshmon,			{0}},
-	{MODKEY,						KC_w,						spawn,				SHCMD("~/Devel/suckless/dmenu/scripts/firefox-profile.sh")},
+	{MODKEY,						KC_w,						spawn,				SHCMD("~/.dev/suckless/dmenu/scripts/firefox-profile.sh")},
 	{0,								KC_mon_brightness_up,		spawn,				SHCMD("xbacklight -inc 10")},
 	{0,								KC_mon_brightness_down,		spawn,				SHCMD("xbacklight -dec 10")},
 	{0,								KC_audio_raise_volume,		spawn,				SHCMD("pulseaudio-ctl up")},
