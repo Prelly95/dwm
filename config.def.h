@@ -136,16 +136,15 @@ static Button buttons[] = {
 	{ClkTagBar,				MODKEY,			Button3,		toggletag,		{0}},
 
 	// Logitec mouse buttons
-	{ClkRootWin,			0,				Button9,		inctag,			{.i = +1}},
-	{ClkClientWin,			0,				Button9,		inctag,			{.i = +1}},
-	{ClkRootWin,			0,				Button8,		inctag,			{.i = -1}},
-	{ClkClientWin,			0,				Button8,		inctag,			{.i = -1}},
+	{ClkRootWin,			0,				Button9,		inctag,			{.i = -1}},
+	{ClkClientWin,			0,				Button9,		inctag,			{.i = -1}},
+	{ClkRootWin,			0,				Button8,		inctag,			{.i = +1}},
+	{ClkClientWin,			0,				Button8,		inctag,			{.i = +1}},
 
-	{ClkClientWin,			MODKEY,			Button9,		tagmon,			{.i = +1}},
-	{ClkClientWin,			MODKEY,			Button8,		tagmon,			{.i = -1}},
-
-	{ClkClientWin,			Mod1Mask,		Button9,		folwin,			{.i = +1}},
-	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = -1}},
+	{ClkClientWin,			MODKEY,			Button9,		tagmon,			{.i = -1}},
+	{ClkClientWin,			Mod1Mask,		Button9,		folwin,			{.i = -1}},
+	{ClkClientWin,			MODKEY,			Button8,		tagmon,			{.i = +1}},
+	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = +1}},
 
 
 	{ClkRootWin,			0,				Button7,		spawn,			SHCMD("pulseaudio-ctl up")},
