@@ -91,8 +91,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				KC_0,						tag,				{.ui = ~0}},			// 0
 	{ MODKEY,						KC_comma,					focusmon,			{.i = -1}},				// comma
 	{ MODKEY,						KC_period,					focusmon,			{.i = +1}},				// period
-	{ MODKEY|ShiftMask,				KC_comma,					tagmon,				{.i = -1}},				// comma
-	{ MODKEY|ShiftMask,				KC_period,					tagmon,				{.i = +1}},				// period
+	{ MODKEY|ShiftMask,				KC_comma,					tagmon,				{.i = +1}},				// comma
+	{ MODKEY|ShiftMask,				KC_period,					tagmon,				{.i = -1}},				// period
 	{ MODKEY|ShiftMask,				KC_q,						quit,				{0}},					// q
 	// My Custom Keybindings
 	{MODKEY|ShiftMask,				KC_r,						quit,				{1}},
@@ -136,15 +136,16 @@ static Button buttons[] = {
 	{ClkTagBar,				MODKEY,			Button3,		toggletag,		{0}},
 
 	// Logitec mouse buttons
-	{ClkRootWin,			0,				Button9,		inctag,			{.i = -1}},
-	{ClkClientWin,			0,				Button9,		inctag,			{.i = -1}},
-	{ClkRootWin,			0,				Button8,		inctag,			{.i = +1}},
-	{ClkClientWin,			0,				Button8,		inctag,			{.i = +1}},
+	{ClkRootWin,			0,				Button9,		inctag,			{.i = +1}},
+	{ClkClientWin,			0,				Button9,		inctag,			{.i = +1}},
+	{ClkRootWin,			0,				Button8,		inctag,			{.i = -1}},
+	{ClkClientWin,			0,				Button8,		inctag,			{.i = -1}},
 
 	{ClkClientWin,			MODKEY,			Button9,		tagmon,			{.i = -1}},
-	{ClkClientWin,			Mod1Mask,		Button9,		folwin,			{.i = -1}},
 	{ClkClientWin,			MODKEY,			Button8,		tagmon,			{.i = +1}},
-	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = +1}},
+
+	{ClkClientWin,			Mod1Mask,		Button9,		folwin,			{.i = +1}},
+	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = -1}},
 
 
 	{ClkRootWin,			0,				Button7,		spawn,			SHCMD("pulseaudio-ctl up")},
