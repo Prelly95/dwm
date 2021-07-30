@@ -86,7 +86,7 @@ static Key keys[] = {
 	{ MODKEY,						KC_t,						setlayout,			{.v = &layouts[0]}},	// t
 	{ MODKEY,						KC_f,						setlayout,			{.v = &layouts[1]}},	// f
 	{ MODKEY,						KC_m,						setlayout,			{.v = &layouts[2]}},	// m
-	{ MODKEY,						KC_space,					setlayout,			{0}},					// space
+	{ MODKEY|ControlMask,			KC_space,					setlayout,			{0}},					// space
 	{ MODKEY|ShiftMask,				KC_space,					togglefloating,		{0}},					// space
 	{ MODKEY,						KC_0,						view,				{.ui = ~0}},			// 0
 	{ MODKEY|ShiftMask,				KC_0,						tag,				{.ui = ~0}},			// 0
