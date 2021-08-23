@@ -99,6 +99,7 @@ static Key keys[] = {
 	{MODKEY|ShiftMask,				KC_r,						quit,				{1}},
 	{MODKEY,						KC_r,						refreshmon,			{0}},
 	{MODKEY,						KC_w,						spawn,				SHCMD("~/.dev/suckless/dmenu/scripts/firefox-profile.sh")},
+	{MODKEY,						KC_g,						spawn,				SHCMD("~/scripts/dwm_hotkeys/grab_colour.sh")},
 	{0,								KC_mon_brightness_up,		spawn,				SHCMD("xbacklight -inc 10")},
 	{0,								KC_mon_brightness_down,		spawn,				SHCMD("xbacklight -dec 10")},
 	{0,								KC_audio_raise_volume,		spawn,				SHCMD("pulseaudio-ctl up")},
