@@ -7,10 +7,13 @@ static const unsigned int snap		= 32;	/* snap pixel */
 static const int showbar			= 1;	/* 0 means no bar */
 static const int topbar				= 1;	/* 0 means bottom bar */
 
-static const char *fonts[] ={	"FontAwesome:size=34",
-								"Liberation Mono:size=34"
+static const char *fonts[] ={	
+								"FontAwesome:size=16",
+								"Hack-Regular-Nerd-Font-Complete-Mono:size=16",
+								"Liberation-Mono:size=16",
+
 							};
-static const char dmenufont[]		= "FontAwesome:size=34";
+static const char dmenufont[]		= "FontAwesome:size=16";
 
 static const char col_gray1[]		= "#222222";
 static const char col_gray2[]		= "#444444";
