@@ -1,25 +1,25 @@
 /* See LICENSE file for copyright and license details.
- *
- * dynamic window manager is designed like any other X client as well. It is
- * driven through handling X events. In contrast to other X clients, a window
- * manager selects for SubstructureRedirectMask on the root window, to receive
- * events about window (dis-)appearance. Only one X connection at a time is
- * allowed to select for this event mask.
- *
- * The event handlers of dwm are organized in an array which is accessed
- * whenever a new event has been fetched. This allows event dispatching
- * in O(1) time.
- *
- * Each child of the root window is called a client, except windows which have
- * set the override_redirect flag. Clients are organized in a linked client
- * list on each monitor, the focus history is remembered through a stack list
- * on each monitor. Each client contains a bit array to indicate the tags of a
- * client.
- *
- * Keys and tagging rules are organized as arrays and defined in config.h.
- *
- * To understand everything else, start reading main().
- */
+*
+* dynamic window manager is designed like any other X client as well. It is
+* driven through handling X events. In contrast to other X clients, a window
+* manager selects for SubstructureRedirectMask on the root window, to receive
+* events about window (dis-)appearance. Only one X connection at a time is
+* allowed to select for this event mask.
+*
+* The event handlers of dwm are organized in an array which is accessed
+* whenever a new event has been fetched. This allows event dispatching
+* in O(1) time.
+*
+* Each child of the root window is called a client, except windows which have
+* set the override_redirect flag. Clients are organized in a linked client
+* list on each monitor, the focus history is remembered through a stack list
+* on each monitor. Each client contains a bit array to indicate the tags of a
+* client.
+*
+* Keys and tagging rules are organized as arrays and defined in config.h.
+*
+* To understand everything else, start reading main().
+*/
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
@@ -31,7 +31,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <X11/cursorfont.h>
-#include <X11/keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -45,27 +44,27 @@
 #include "util.h"
 
 /* macros */
-#define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
-#define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
-#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
-                               * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
-#define LENGTH(X)               (sizeof X / sizeof X[0])
-#define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
-#define WIDTH(X)                ((X)->w + 2 * (X)->bw)
-#define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
-#define TAGMASK                 ((1 << LENGTH(tags)) - 1)
-#define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+#define BUTTONMASK				(ButtonPressMask|ButtonReleaseMask)
+#define CLEANMASK(mask)			(mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
+#define INTERSECT(x,y,w,h,m)	(MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
+									* MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+#define ISVISIBLE(C)			((C->tags & C->mon->tagset[C->mon->seltags]))
+#define LENGTH(X)				(sizeof X / sizeof X[0])
+#define MOUSEMASK				(BUTTONMASK|PointerMotionMask)
+#define WIDTH(X)				((X)->w + 2 * (X)->bw)
+#define HEIGHT(X)				((X)->h + 2 * (X)->bw)
+#define TAGMASK					((1 << LENGTH(tags)) - 1)
+#define TEXTW(X)				(drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
-enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
-enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
-       NetWMFullscreen, NetActiveWindow, NetWMWindowType,
-       NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
-enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
-enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-       ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
+enum {	CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+enum {	SchemeNorm, SchemeSel }; /* color schemes */
+enum {	NetSupported, NetWMName, NetWMState, NetWMCheck,
+		NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+		NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+enum {	WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+enum {	ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+		ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
 
 typedef union {
 	int i;
@@ -101,7 +100,7 @@ struct Client {
 
 typedef struct {
 	unsigned int mod;
-	KeySym keysym;
+	KeyCode keycode;
 	void (*func)(const Arg *);
 	const Arg arg;
 } Key;
@@ -207,14 +206,20 @@ static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
+static void sighup(int unused);
+static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
+static void tagview(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
+static void inctag(const Arg *arg);
+static void folwin(const Arg *arg);
+static void refreshmon(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
 static void unmanage(Client *c, int destroyed);
 static void unmapnotify(XEvent *e);
@@ -262,6 +267,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[UnmapNotify] = unmapnotify
 };
 static Atom wmatom[WMLast], netatom[NetLast];
+static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
@@ -723,9 +729,10 @@ drawbar(Monitor *m)
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+			drw_rect(drw, x + boxw, 0, w - ( 2 * boxw + 1), (boxw * .5),
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 				urg & 1 << i);
+
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);
@@ -734,8 +741,12 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
-			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+			/* fix overflow when window name is bigger than window width */
+			int mid = (m->ww - (int)TEXTW(m->sel->name)) / 2 - x;
+			/* make sure name will not overlap on tags even when it is very long */
+			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
+			drw_setscheme(drw, scheme[SchemeNorm]);
+			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
@@ -956,14 +967,12 @@ grabkeys(void)
 	{
 		unsigned int i, j;
 		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
-		KeyCode code;
 
 		XUngrabKey(dpy, AnyKey, AnyModifier, root);
 		for (i = 0; i < LENGTH(keys); i++)
-			if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
-				for (j = 0; j < LENGTH(modifiers); j++)
-					XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
-						True, GrabModeAsync, GrabModeAsync);
+			for (j = 0; j < LENGTH(modifiers); j++)
+				XGrabKey(dpy, keys[i].keycode, keys[i].mod | modifiers[j], root,
+					True, GrabModeAsync, GrabModeAsync);
 	}
 }
 
@@ -990,13 +999,11 @@ void
 keypress(XEvent *e)
 {
 	unsigned int i;
-	KeySym keysym;
 	XKeyEvent *ev;
 
 	ev = &e->xkey;
-	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
 	for (i = 0; i < LENGTH(keys); i++)
-		if (keysym == keys[i].keysym
+		if (ev->keycode == keys[i].keycode
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
 		&& keys[i].func)
 			keys[i].func(&(keys[i].arg));
@@ -1256,6 +1263,7 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
+	if(arg->i) restart = 1;
 	running = 0;
 }
 
@@ -1544,6 +1552,9 @@ setup(void)
 	/* clean up any zombies immediately */
 	sigchld(0);
 
+	signal(SIGHUP, sighup);
+	signal(SIGTERM, sigterm);
+
 	/* init screen */
 	screen = DefaultScreen(dpy);
 	sw = DisplayWidth(dpy, screen);
@@ -1645,6 +1656,20 @@ sigchld(int unused)
 }
 
 void
+sighup(int unused)
+{
+	Arg a = {.i = 1};
+	quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+	Arg a = {.i = 0};
+	quit(&a);
+}
+
+void
 spawn(const Arg *arg)
 {
 	if (arg->v == dmenucmd)
@@ -1671,6 +1696,55 @@ tag(const Arg *arg)
 }
 
 void
+tagview(const Arg *arg)
+{
+	if (selmon->sel && arg->ui & TAGMASK) {
+		selmon->sel->tags = arg->ui & TAGMASK;
+		focus(NULL);
+		arrange(selmon);
+	}
+	view(arg);
+}
+
+void
+inctag(const Arg *arg)
+{	unsigned int tmp_tags = selmon->tagset[selmon->seltags];
+	if (arg->i > 0)
+	{	tmp_tags <<= 1;
+	}
+	else
+	{	tmp_tags >>= 1;
+	}
+
+	if(!(tmp_tags & TAGMASK))
+		return;
+
+	selmon->tagset[selmon->seltags] = tmp_tags;
+	focus(NULL);
+	arrange(selmon);
+}
+
+void
+folwin(const Arg *arg)
+{	if(arg->i > 0)
+	{	unsigned int new_tag = (selmon->sel->tags << 1);
+		if (selmon->sel && (new_tag & TAGMASK))
+		{	selmon->sel->tags = new_tag & TAGMASK;
+			focus(NULL);
+			arrange(selmon);
+		}
+	}
+	else if(arg->i < 0)
+	{	unsigned int new_tag = (selmon->sel->tags >> 1);
+		if (selmon->sel && (new_tag & TAGMASK))
+		{	selmon->sel->tags = new_tag & TAGMASK;
+			focus(NULL);
+			arrange(selmon);
+		}
+	}
+}
+
+void
 tagmon(const Arg *arg)
 {
 	if (!selmon->sel || !mons->next)
@@ -1681,28 +1755,29 @@ tagmon(const Arg *arg)
 void
 tile(Monitor *m)
 {
-	unsigned int i, n, h, mw, my, ty;
+	unsigned int i, n, h, mw, my, ty, ns;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
 
-	if (n > m->nmaster)
+	if (n > m->nmaster) {
 		mw = m->nmaster ? m->ww * m->mfact : 0;
-	else
+		ns = m->nmaster > 0 ? 2 : 1;
+	} else {
 		mw = m->ww;
-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		ns = 1;
+	}
+	for(i = 0, my = ty = gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
-			if (my + HEIGHT(c) < m->wh)
-				my += HEIGHT(c);
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - gappx;
+			resize(c, m->wx + gappx, m->wy + my, mw - (2*c->bw) - gappx*(5-ns)/2, h - (2*c->bw), False);
+			my += HEIGHT(c) + gappx;
 		} else {
-			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
-			if (ty + HEIGHT(c) < m->wh)
-				ty += HEIGHT(c);
+			h = (m->wh - ty) / (n - i) - gappx;
+			resize(c, m->wx + mw + gappx/ns, m->wy + ty, m->ww - mw - (2*c->bw) - gappx*(5-ns)/2, h - (2*c->bw), False);
+			ty += HEIGHT(c) + gappx;
 		}
 }
 
@@ -1713,6 +1788,14 @@ togglebar(const Arg *arg)
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
+}
+
+void
+refreshmon(const Arg *arg)
+{
+	togglebar(arg);
+	usleep(300000);
+	togglebar(arg);
 }
 
 void
@@ -2087,8 +2170,8 @@ wintomon(Window w)
 }
 
 /* There's no way to check accesses to destroyed windows, thus those cases are
- * ignored (especially on UnmapNotify's). Other types of errors call Xlibs
- * default error handler, which may call exit. */
+* ignored (especially on UnmapNotify's). Other types of errors call Xlibs
+* default error handler, which may call exit. */
 int
 xerror(Display *dpy, XErrorEvent *ee)
 {
@@ -2114,7 +2197,7 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
 }
 
 /* Startup Error handler to check if another window manager
- * is already running. */
+* is already running. */
 int
 xerrorstart(Display *dpy, XErrorEvent *ee)
 {
@@ -2155,6 +2238,7 @@ main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
 	scan();
 	run();
+	if(restart) execvp(argv[0], argv);
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
