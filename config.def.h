@@ -71,7 +71,7 @@ static const char *termcmd[]  = {"alacritty", NULL};
 
 static Key keys[] = {
 	/* modifier						key							function			argument */
-	{ MODKEY,						KC_p,						spawn,				{.v = dmenucmd}},		// p
+	{ MODKEY,						KC_space,						spawn,				{.v = dmenucmd}},		// p
 	{ MODKEY|ShiftMask,				KC_return,					spawn,				{.v = termcmd}},		// Return
 	{ MODKEY,						KC_b,						togglebar,			{0}},					// b
 	{ MODKEY,						KC_j,						focusstack,			{.i = +1}},				// j
