@@ -41,6 +41,7 @@ static const Rule rules[] = {
 	{"firefox",		"Devtools",		NULL,				0,				1,				1,				-1},
 	{NULL,			NULL,			"Web Inspector",	0,				1,				1,				-1},
 	{NULL,			"fontpreview",	NULL,				0,				1,				1,				-1},
+	{"FreeCAD",		"freecad",		NULL,				0,				1,				0,				-1},
 };
 
 /* layout(s) */
