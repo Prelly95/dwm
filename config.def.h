@@ -75,12 +75,11 @@ static const char *termcmd[]  = {"alacritty", NULL};
 
 static Key keys[] = {
 	/* modifier						key							function			argument */
-	{ MODKEY,						KC_space,						spawn,				{.v = dmenucmd}},		// p
+	{ MODKEY,						KC_space,					spawn,				{.v = dmenucmd}},		// p
 	{ MODKEY|ShiftMask,				KC_return,					spawn,				{.v = termcmd}},		// Return
 	{ MODKEY,						KC_b,						togglebar,			{0}},					// b
-	{ MODKEY,						KC_j,						focusstack,			{.i = +1}},				// j
-	{ MODKEY,						KC_k,						focusstack,			{.i = -1}},				// k
-	{ MODKEY,						KC_i,						incnmaster,			{.i = +1}},				// i
+	{ MODKEY,						KC_k,						focusstack,			{.i = +1}},				// k
+	{ MODKEY,						KC_i,						incnmaster,			{.i = -1}},				// i
 	{ MODKEY,						KC_d,						incnmaster,			{.i = -1}},				// d
 	{ MODKEY,						KC_h,						setmfact,			{.f = -0.05}},			// h
 	{ MODKEY,						KC_l,						setmfact,			{.f = +0.05}},			// l
@@ -94,8 +93,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				KC_space,					togglefloating,		{0}},					// space
 	{ MODKEY,						KC_0,						view,				{.ui = ~0}},			// 0
 	{ MODKEY|ShiftMask,				KC_0,						tag,				{.ui = ~0}},			// 0
-	{ MODKEY,						KC_comma,					focusmon,			{.i = -1}},				// comma
-	{ MODKEY,						KC_period,					focusmon,			{.i = +1}},				// period
+	{ MODKEY,						KC_comma,					focusmon,			{.i = +1}},				// comma
+	{ MODKEY,						KC_period,					focusmon,			{.i = -1}},				// period
 	{ MODKEY|ShiftMask,				KC_comma,					tagmon,				{.i = +1}},				// comma
 	{ MODKEY|ShiftMask,				KC_period,					tagmon,				{.i = -1}},				// period
 	{ MODKEY|ShiftMask,				KC_q,						quit,				{0}},					// q
@@ -106,9 +105,9 @@ static Key keys[] = {
 	{MODKEY,						KC_g,						spawn,				SHCMD("~/scripts/dwm_hotkeys/grab_colour.sh")},
 	{0,								KC_mon_brightness_up,		spawn,				SHCMD("xbacklight -inc 10")},
 	{0,								KC_mon_brightness_down,		spawn,				SHCMD("xbacklight -dec 10")},
-	{0,								KC_audio_raise_volume,		spawn,				SHCMD("pulseaudio-ctl up")},
-	{0,								KC_audio_lower_volume,		spawn,				SHCMD("pulseaudio-ctl down")},
-	{0,								KC_audio_mute,				spawn,				SHCMD("pulseaudio-ctl mute")},
+	{0,								KC_audio_raise_volume,		spawn,				SHCMD("/home/pat/scripts/volumectl +5%")},
+	{0,								KC_audio_lower_volume,		spawn,				SHCMD("/home/pat/scripts/volumectl -5%")},
+	{0,								KC_audio_mute,				spawn,				SHCMD("/home/pat/scripts/volumectl mute toggle")},
 	{0,								KC_audio_toggle,			spawn,				SHCMD("playerctl play-pause")},
 	{0,								KC_audio_pause,				spawn,				SHCMD("playerctl pause")},
 	{0,								KC_audio_play,				spawn,				SHCMD("playerctl play-pause")},
@@ -154,9 +153,9 @@ static Button buttons[] = {
 	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = -1}},
 
 
-	{ClkRootWin,			0,				Button7,		spawn,			SHCMD("pulseaudio-ctl up")},
-	{ClkClientWin,			0,				Button7,		spawn,			SHCMD("pulseaudio-ctl up")},
-	{ClkRootWin,			0,				Button6,		spawn,			SHCMD("pulseaudio-ctl down")},
-	{ClkClientWin,			0,				Button6,		spawn,			SHCMD("pulseaudio-ctl down")},
+	{ClkRootWin,			MODKEY,				Button7,		spawn,			SHCMD("/home/pat/scripts/volumectl +5%")},
+	{ClkClientWin,			MODKEY,				Button7,		spawn,			SHCMD("/home/pat/scripts/volumectl +5%")},
+	{ClkRootWin,			MODKEY,				Button6,		spawn,			SHCMD("/home/pat/scripts/volumectl -5%")},
+	{ClkClientWin,			MODKEY,				Button6,		spawn,			SHCMD("/home/pat/scripts/volumectl -5%")},
 };
 
