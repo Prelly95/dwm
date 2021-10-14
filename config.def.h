@@ -36,12 +36,15 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class		instance		title				tags mask		iscentered		isfloating		monitor */
-	{"Gimp",		NULL,			NULL,				0,				1,				1,				-1},
-	{"firefox",		"Devtools",		NULL,				0,				1,				1,				-1},
-	{NULL,			NULL,			"Web Inspector",	0,				1,				1,				-1},
-	{NULL,			"fontpreview",	NULL,				0,				1,				1,				-1},
-	{"FreeCAD",		"freecad",		NULL,				0,				1,				0,				-1},
+	/* class			instance		title				tags mask		iscentered		isfloating		monitor */
+	{"Gimp",			NULL,			NULL,				0,				1,				1,				-1},
+	{"firefox",			"Devtools",		NULL,				0,				1,				1,				-1},
+	{NULL,				NULL,			"Web Inspector",	0,				1,				1,				-1},
+	{NULL,				"fontpreview",	NULL,				0,				1,				1,				-1},
+	{"Blueberry.py",	NULL,			"Bluetooth",		0,				1,				1,				-1},
+	{"Spotify",			"spotify",		NULL,				0,				1,				0,				1},
+	{"Slack"		,	"slack",		NULL,				0,				1,				0,				1},
+	{"FreeCAD",			"freecad",		NULL,				0,				1,				0,				-1},
 };
 
 /* layout(s) */
