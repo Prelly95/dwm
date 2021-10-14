@@ -108,7 +108,7 @@ static Key keys[] = {
 	{0,								KC_mon_brightness_down,		spawn,				SHCMD("xbacklight -dec 10")},
 	{0,								KC_audio_raise_volume,		spawn,				SHCMD("/home/pat/scripts/volumectl +5%")},
 	{0,								KC_audio_lower_volume,		spawn,				SHCMD("/home/pat/scripts/volumectl -5%")},
-	{0,								KC_audio_mute,				spawn,				SHCMD("/home/pat/scripts/volumectl mute toggle")},
+	{0,								KC_audio_mute,				spawn,				SHCMD("/home/pat/scripts/volumectl toggle")},
 	{0,								KC_audio_toggle,			spawn,				SHCMD("playerctl play-pause")},
 	{0,								KC_audio_pause,				spawn,				SHCMD("playerctl pause")},
 	{0,								KC_audio_play,				spawn,				SHCMD("playerctl play-pause")},
@@ -152,7 +152,6 @@ static Button buttons[] = {
 
 	{ClkClientWin,			Mod1Mask,		Button9,		folwin,			{.i = +1}},
 	{ClkClientWin,			Mod1Mask,		Button8,		folwin,			{.i = -1}},
-
 
 	{ClkRootWin,			MODKEY,				Button7,		spawn,			SHCMD("/home/pat/scripts/volumectl +5%")},
 	{ClkClientWin,			MODKEY,				Button7,		spawn,			SHCMD("/home/pat/scripts/volumectl +5%")},
