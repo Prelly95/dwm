@@ -43,9 +43,10 @@ static const Rule rules[] = {
 	{NULL,				NULL,			"Web Inspector",	0,				1,				1,				-1},
 	{NULL,				"fontpreview",	NULL,				0,				1,				1,				-1},
 	{"Blueberry.py",	NULL,			"Bluetooth",		0,				1,				1,				-1},
+	{"FreeCAD",			"freecad",		NULL,				0,				1,				0,				-1},
 	{"Spotify",			"spotify",		NULL,				0,				1,				0,				1},
 	{"Slack"		,	"slack",		NULL,				0,				1,				0,				1},
-	{"FreeCAD",			"freecad",		NULL,				0,				1,				0,				-1},
+	{"discord",			"discord",		"Discord Updater",	0,				1,				0,				1},
 };
 
 /* layout(s) */
