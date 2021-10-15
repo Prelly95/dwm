@@ -277,7 +277,11 @@ static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
 
 /* configuration, allows nested code to access above variables */
+#ifdef _CONFIG_
 #include "config.h"
+#else
+#include "config.def.h"
+#endif
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
@@ -2081,7 +2085,7 @@ void
 updatestatus(void)
 {
 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-		strcpy(stext, "dwm-"VERSION);
+		sprintf(stext, "dwm-%s", VERSION);
 	drawbar(selmon);
 }
 
@@ -2221,9 +2225,9 @@ zoom(const Arg *arg)
 
 int
 main(int argc, char *argv[])
-{
+{	
 	if (argc == 2 && !strcmp("-v", argv[1]))
-		die("dwm-"VERSION);
+		die("dwm-%f", VERSION);
 	else if (argc != 1)
 		die("usage: dwm [-v]");
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())

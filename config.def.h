@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#define _CONFIG_
 #include "key_codes.h"
 /* appearance */
 static const unsigned int borderpx	= 2;	/* border pixel of windows */
