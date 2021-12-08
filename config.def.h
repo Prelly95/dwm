@@ -107,8 +107,8 @@ static Key keys[] = {
 	// My Custom Keybindings
 	{MODKEY|ShiftMask,				KC_r,						quit,				{1}},
 	{MODKEY,						KC_r,						refreshmon,			{0}},
-	{MODKEY,						KC_w,						spawn,				SHCMD("/home/pat/.dev/suckless/dmenu/scripts/firefox-profile.sh")},
-	{MODKEY,						KC_g,						spawn,				SHCMD("/home/pat/scripts/dwm_hotkeys/grab_colour.sh")},
+	{MODKEY,						KC_w,						spawn,				SHCMD("/home/pat/scripts/chrome-profile.sh")},
+	{MODKEY,						KC_g,						spawn,				SHCMD("/home/pat/scripts/grab_colour.sh")},
 	{0,								KC_mon_brightness_up,		spawn,				SHCMD("/home/pat/scripts/brightness +")},
 	{0,								KC_mon_brightness_down,		spawn,				SHCMD("/home/pat/scripts/brightness -")},
 	{0,								KC_audio_raise_volume,		spawn,				SHCMD("/home/pat/scripts/volumectl +5%")},
