@@ -40,6 +40,7 @@ static const Rule rules[] = {
 	/* class			instance		title				tags mask		iscentered		isfloating		monitor */
 	{"Gimp",			NULL,			NULL,				0,				1,				1,				-1},
 	{"firefox",			"Devtools",		NULL,				0,				1,				1,				-1},
+	{"feh",				"feh",			NULL,				0,				1,				1,				-1},
 	{NULL,				NULL,			"Web Inspector",	0,				1,				1,				-1},
 	{NULL,				"fontpreview",	NULL,				0,				1,				1,				-1},
 	{"Blueberry.py",	NULL,			"Bluetooth",		0,				1,				1,				-1},
@@ -107,6 +108,7 @@ static Key keys[] = {
 	// My Custom Keybindings
 	{MODKEY|ShiftMask,				KC_r,						quit,				{1}},
 	{MODKEY,						KC_r,						refreshmon,			{0}},
+	{MODKEY,						KC_s,						spawn,				SHCMD("/home/pat/scripts/screenshot.sh")},
 	{MODKEY,						KC_w,						spawn,				SHCMD("/home/pat/scripts/chrome-profile.sh")},
 	{MODKEY,						KC_g,						spawn,				SHCMD("/home/pat/scripts/grab_colour.sh")},
 	{0,								KC_mon_brightness_up,		spawn,				SHCMD("/home/pat/scripts/brightness +")},
