@@ -87,7 +87,7 @@ static Key keys[] = {
 	{ MODKEY,						KC_b,						togglebar,			{0}},					// b
 	{ MODKEY,						KC_k,						focusstack,			{.i = +1}},				// k
 	{ MODKEY,						KC_i,						incnmaster,			{.i = -1}},				// i
-	{ MODKEY,						KC_d,						incnmaster,			{.i = -1}},				// d
+	{ MODKEY,						KC_d,						incnmaster,			{.i = +1}},				// d
 	{ MODKEY,						KC_h,						setmfact,			{.f = -0.05}},			// h
 	{ MODKEY,						KC_l,						setmfact,			{.f = +0.05}},			// l
 	{ MODKEY,						KC_return,					zoom,				{0}},					// Return
