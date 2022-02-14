@@ -78,11 +78,12 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL};
+static const char *roficmd[] = {"rofi", "-modi", "calc,", "drun", "-show", "drun"};
 static const char *termcmd[]  = {"alacritty", NULL};
 
 static Key keys[] = {
 	/* modifier						key							function			argument */
-	{ MODKEY,						KC_space,					spawn,				{.v = dmenucmd}},		// p
+	{ MODKEY,						KC_space,					spawn,				{.v = roficmd}},		// p
 	{ MODKEY|ShiftMask,				KC_return,					spawn,				{.v = termcmd}},		// Return
 	{ MODKEY,						KC_b,						togglebar,			{0}},					// b
 	{ MODKEY,						KC_k,						focusstack,			{.i = +1}},				// k
