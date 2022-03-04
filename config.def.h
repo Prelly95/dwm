@@ -7,14 +7,13 @@ static const unsigned int gappx		= 18;	/* gap pixel between windows */
 static const unsigned int snap		= 32;	/* snap pixel */
 static const int showbar			= 1;	/* 0 means no bar */
 static const int topbar				= 1;	/* 0 means bottom bar */
-
+static const int user_bh			= 55;   /* 0 means har height is dependent on font*/
 static const char *fonts[] ={	
-								"FontAwesome:size=16",
-								"Hack-Regular-Nerd-Font-Complete-Mono:size=16",
-								"Liberation-Mono:size=16",
-
+								"NotoSansMonoBold:size=20",
+								"FontAwesome:size=8",
+								"LiberationMono:size=8",
 							};
-static const char dmenufont[]		= "FontAwesome:size=16";
+static const char dmenufont[]		= "FontAwesome:size=18";
 
 static const char col_gray1[]		= "#222222";
 static const char col_gray2[]		= "#444444";
@@ -45,9 +44,9 @@ static const Rule rules[] = {
 	{NULL,				"fontpreview",	NULL,				0,				1,				1,				-1},
 	{"Blueberry.py",	NULL,			"Bluetooth",		0,				1,				1,				-1},
 	{"FreeCAD",			"freecad",		NULL,				0,				1,				0,				-1},
-	{"Spotify",			"spotify",		NULL,				0,				1,				0,				1},
-	{"Slack"		,	"slack",		NULL,				0,				1,				0,				1},
-	{"discord",			"discord",		"Discord Updater",	0,				1,				0,				1},
+	{"Spotify",			"spotify",		NULL,				0,				1,				0,				-1},
+	{"Slack"		,	"slack",		NULL,				0,				1,				0,				-1},
+	{"discord",			"discord",		"Discord Updater",	0,				1,				0,				-1},
 };
 
 /* layout(s) */
