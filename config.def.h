@@ -13,7 +13,7 @@ static const char *fonts[] ={
 								"FontAwesome:size=8",
 								"LiberationMono:size=8",
 							};
-static const char dmenufont[]		= "FontAwesome:size=18";
+static const char dmenufont[]		= "NotoSansMonoBold:size=20";
 
 static const char col_gray1[]		= "#222222";
 static const char col_gray2[]		= "#444444";
