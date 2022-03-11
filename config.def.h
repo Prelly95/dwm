@@ -9,11 +9,11 @@ static const int showbar			= 1;	/* 0 means no bar */
 static const int topbar				= 1;	/* 0 means bottom bar */
 static const int user_bh			= 55;   /* 0 means har height is dependent on font*/
 static const char *fonts[] ={	
-								"NotoSansMonoBold:size=20",
-								"FontAwesome:size=8",
-								"LiberationMono:size=8",
+								"NotoSansMonoBold:size=16",
+								"FontAwesome:size=16",
+								"LiberationMono:size=16",
 							};
-static const char dmenufont[]		= "NotoSansMonoBold:size=20";
+static const char dmenufont[]		= "NotoSansMonoBold:size=16";
 
 static const char col_gray1[]		= "#222222";
 static const char col_gray2[]		= "#444444";
