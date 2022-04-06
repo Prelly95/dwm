@@ -47,6 +47,8 @@ static const Rule rules[] = {
 	{"Spotify",			"spotify",		NULL,				0,				1,				0,				-1},
 	{"Slack"		,	"slack",		NULL,				0,				1,				0,				-1},
 	{"discord",			"discord",		"Discord Updater",	0,				1,				0,				-1},
+	{"qalculate-qt",	"qalculate-qt",	NULL,				0,				1,				1,				-1},
+	{"feh",				"feh",			NULL,				0,				1,				1,				-1},
 };
 
 /* layout(s) */
