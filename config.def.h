@@ -143,7 +143,6 @@ static Button buttons[] = {
 	{ClkLtSymbol,			0,				Button1,		setlayout,		{0}},
 	{ClkLtSymbol,			0,				Button3,		setlayout,		{.v = &layouts[2]}},
 	{ClkWinTitle,			0,				Button2,		zoom,			{0}},
-	{ClkStatusText,			0,				Button2,		spawn,			{.v = termcmd}},
 	{ClkClientWin,			MODKEY,			Button1,		movemouse,		{0}},
 	{ClkClientWin,			MODKEY,			Button2,		togglefloating,	{0}},
 	{ClkClientWin,			MODKEY,			Button3,		resizemouse,	{0}},
@@ -151,6 +150,10 @@ static Button buttons[] = {
 	{ClkTagBar,				0,				Button3,		toggleview,		{0}},
 	{ClkTagBar,				MODKEY,			Button1,		tag,			{0}},
 	{ClkTagBar,				MODKEY,			Button3,		toggletag,		{0}},
+
+	{ClkStatusText,			0,				Button1,		sigstatusbar,	{.i = 1}},
+	{ClkStatusText,			0,				Button3,		sigstatusbar,	{.i = 2}},
+	{ClkStatusText,			ShiftMask,		Button1,		sigstatusbar,	{.i = 6}},
 
 	// Logitec mouse buttons
 	{ClkRootWin,			0,				Button9,		inctag,			{.i = +1}},
