@@ -1127,7 +1127,7 @@ void grabkeys(void)
 		for (i = 0; i < LENGTH(keys); i++)
 			for (j = 0; j < LENGTH(modifiers); j++)
 				XGrabKey(dpy, keys[i].keycode, keys[i].mod | modifiers[j], root,
-						 True, GrabModeAsync, GrabModeAsync);
+						True, GrabModeAsync, GrabModeAsync);
 	}
 }
 
